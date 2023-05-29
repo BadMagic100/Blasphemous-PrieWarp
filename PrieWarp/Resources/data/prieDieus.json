@@ -1,0 +1,172 @@
+﻿[
+  {
+    "langKey": "pd_brotherhood_main",
+    "scene": "D17Z01S05",
+    "defaultHotkey": "BM"
+  },
+  {
+    "langKey": "pd_brotherhood_upper",
+    "scene": "D17Z01S13",
+    "defaultHotkey": "BU"
+  },
+  {
+    "langKey": "pd_mountain_east",
+    "scene": "D03Z01S02",
+    "defaultHotkey": "DE"
+  },
+  {
+    "langKey": "pd_mountain_west",
+    "scene": "D03Z01S05",
+    "defaultHotkey": "DW"
+  },
+  {
+    "langKey": "pd_jondo",
+    "scene": "D03Z02S02",
+    "defaultHotkey": "JO"
+  },
+  {
+    "langKey": "pd_grievance_entrance",
+    "scene": "D03Z03S01",
+    "defaultHotkey": "GA"
+  },
+  {
+    "langKey": "pd_grievance_tres_angustias",
+    "scene": "D03Z03S11",
+    "defaultHotkey": "TA"
+  },
+  {
+    "langKey": "pd_holy_line",
+    "scene": "D01Z01S07",
+    "defaultHotkey": "HL"
+  },
+  {
+    "langKey": "pd_albero",
+    "scene": "D01Z02S01",
+    "defaultHotkey": "AA"
+  },
+  {
+    "langKey": "pd_bridge",
+    "scene": "D08Z01S01",
+    "defaultHotkey": "BR"
+  },
+  {
+    "langKey": "pd_mercy_entrance",
+    "scene": "D01Z04S03",
+    "defaultHotkey": "MD"
+  },
+  {
+    "langKey": "pd_mercy_ten_piedad",
+    "scene": "D01Z04S12",
+    "defaultHotkey": "TP"
+  },
+  {
+    "langKey": "pd_cistern",
+    "scene": "D01Z05S19",
+    "defaultHotkey": "DC"
+  },
+  {
+    "langKey": "pd_echoes_west",
+    "scene": "D20Z01S01",
+    "defaultHotkey": "EW"
+  },
+  {
+    "langKey": "pd_echoes_east",
+    "scene": "D20Z01S11",
+    "defaultHotkey": "EE"
+  },
+  {
+    "langKey": "pd_olive_trees",
+    "scene": "D02Z01S01",
+    "defaultHotkey": "OT"
+  },
+  {
+    "langKey": "pd_graveyard",
+    "scene": "D02Z02S08",
+    "defaultHotkey": "GP"
+  },
+  {
+    "langKey": "pd_convent_entrance",
+    "scene": "D02Z03S08",
+    "defaultHotkey": "CE"
+  },
+  {
+    "langKey": "pd_convent_charred_visage_boss",
+    "scene": "D02Z03S09",
+    "defaultHotkey": "CV"
+  },
+  {
+    "langKey": "pd_patio",
+    "scene": "D04Z01S01",
+    "defaultHotkey": "PS"
+  },
+  {
+    "langKey": "pd_mother_entrance",
+    "scene": "D04Z03S01",
+    "defaultHotkey": "MM"
+  },
+  {
+    "langKey": "pd_mother_melquiades",
+    "scene": "D20Z01S01",
+    "defaultHotkey": "MQ"
+  },
+  {
+    "langKey": "pd_library_main",
+    "scene": "D05Z01S03",
+    "defaultHotkey": "LN"
+  },
+  {
+    "langKey": "pd_library_patio_shortcut",
+    "scene": "D05Z01S20",
+    "defaultHotkey": "LP"
+  },
+  {
+    "langKey": "pd_canvases_entrance",
+    "scene": "D05Z02S01",
+    "defaultHotkey": "SC"
+  },
+  {
+    "langKey": "pd_canvases_exposito",
+    "scene": "D05Z02S07",
+    "defaultHotkey": "LP"
+  },
+  {
+    "langKey": "pd_wall",
+    "scene": "D09Z01S11",
+    "defaultHotkey": "WH"
+  },
+  {
+    "langKey": "pd_rooftops_entrance",
+    "scene": "D06Z01S02",
+    "defaultHotkey": "RE"
+  },
+  {
+    "langKey": "pd_rooftops_below_elevator",
+    "scene": "D06Z01S23",
+    "defaultHotkey": "RL"
+  },
+  {
+    "langKey": "pd_rooftops_upper",
+    "scene": "D06Z01S09",
+    "defaultHotkey": "RU"
+  },
+  {
+    "langKey": "pd_rooftops_deambulatory",
+    "scene": "D07Z01S01",
+    "defaultHotkey": "DH"
+  },
+  {
+    "langKey": "pd_havoc_by_elevator",
+    "scene": "D20Z02S01",
+    "defaultHotkey": "HE"
+  },
+  {
+    "langKey": "pd_havoc_sierpes",
+    "scene": "D20Z02S09",
+    "defaultHotkey": "SI"
+  },
+  {
+    "langKey": "pd_hall_of_dawning",
+    "scene": "D08Z03S02",
+    "defaultHotkey": "HD"
+  }
+]
