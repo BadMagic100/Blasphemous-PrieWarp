@@ -43,4 +43,35 @@
             <HintPath>$(BlasphemousDir)/Modding/plugins/ModdingAPI.dll</HintPath>
         </Reference>
     </ItemGroup>
+
+    <Target Name="Packaging" AfterTargets="PostBuildEvent">
+        <PropertyGroup>
+            <PackageDir>$(TargetDir)/Packaging</PackageDir>
+            <BundleDir>$(PackageDir)/bundle</BundleDir>
+        </PropertyGroup>
+        <ItemGroup>
+            <DataFiles Include="Resources/data/**" />
+            <LanguageFiles Include="Resources/localization/*.txt" />
+        </ItemGroup>
+        <RemoveDir Directories="$(PackageDir)" />
+        <MakeDir Directories="$(PackageDir)" />
+        <MakeDir Directories="$(BundleDir)" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(BundleDir)/plugins" />
+        <Copy SourceFiles="@(DataFiles)" DestinationFolder="$(BundleDir)/data/$(TargetName)" />
+        <Copy SourceFiles="@(LanguageFiles)" DestinationFolder="$(BundleDir)/localization" />
+        <!--Other copy targets would go here too e.g. for level edits-->
+        <ZipDirectory SourceDirectory="$(BundleDir)" DestinationFile="$(PackageDir)/$(TargetName).zip" />
+    </Target>
+    <Target Name="DeployLocally" AfterTargets="Packaging">
+        <PropertyGroup>
+            <PackageDir>$(TargetDir)/Packaging</PackageDir>
+            <BundleDir>$(PackageDir)/bundle</BundleDir>
+        </PropertyGroup>
+        <!--We've made the releasable zip copy, now make some additional changes for our personal copy and "deploy" it-->
+        <Copy SourceFiles="$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(BlasphemousDir)/Modding/plugins" />
+        <ItemGroup>
+            <BundledFiles Include="$(BundleDir)/**/*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(BundledFiles)" DestinationFolder="$(BlasphemousDir)/Modding/%(RecursiveDir)" />
+    </Target>
 </Project>
