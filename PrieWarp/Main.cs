@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using System;
 
 namespace PrieWarp
 {
@@ -6,11 +7,15 @@ namespace PrieWarp
     [BepInDependency("com.damocles.blasphemous.modding-api", "1.3.4")]
     public class Main : BaseUnityPlugin
     {
-        public static PrieWarp PrieWarp;
+        private static PrieWarp? prieWarp;
+        public static PrieWarp PrieWarp
+        {
+            get => prieWarp ?? throw new NullReferenceException("Early access to PrieWarp instance");
+        }
 
         private void Start()
         {
-            PrieWarp = new(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION);
+            prieWarp = new(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION);
         }
     }
 }

@@ -1,172 +1,206 @@
 ﻿[
   {
-    "langKey": "pd_brotherhood_main",
+    "label": "pd_brotherhood_main",
     "scene": "D17Z01S05",
+    "id": "",
     "defaultHotkey": "BM"
   },
   {
-    "langKey": "pd_brotherhood_upper",
+    "label": "pd_brotherhood_upper",
     "scene": "D17Z01S13",
+    "id": "",
     "defaultHotkey": "BU"
   },
   {
-    "langKey": "pd_mountain_east",
+    "label": "pd_mountain_brotherhood",
     "scene": "D03Z01S02",
-    "defaultHotkey": "DE"
+    "id": "",
+    "defaultHotkey": "MB"
   },
   {
-    "langKey": "pd_mountain_west",
+    "label": "pd_mountain_cistern",
     "scene": "D03Z01S05",
-    "defaultHotkey": "DW"
+    "id": "",
+    "defaultHotkey": "MC"
   },
   {
-    "langKey": "pd_jondo",
+    "label": "pd_jondo",
     "scene": "D03Z02S02",
+    "id": "",
     "defaultHotkey": "JO"
   },
   {
-    "langKey": "pd_grievance_entrance",
+    "label": "pd_grievance_entrance",
     "scene": "D03Z03S01",
+    "id": "",
     "defaultHotkey": "GA"
   },
   {
-    "langKey": "pd_grievance_tres_angustias",
+    "label": "pd_grievance_tres_angustias",
     "scene": "D03Z03S11",
+    "id": "",
     "defaultHotkey": "TA"
   },
   {
-    "langKey": "pd_holy_line",
+    "label": "pd_holy_line",
     "scene": "D01Z01S07",
+    "id": "",
     "defaultHotkey": "HL"
   },
   {
-    "langKey": "pd_albero",
+    "label": "pd_albero",
     "scene": "D01Z02S01",
+    "id": "",
     "defaultHotkey": "AA"
   },
   {
-    "langKey": "pd_bridge",
+    "label": "pd_bridge",
     "scene": "D08Z01S01",
+    "id": "",
     "defaultHotkey": "BR"
   },
   {
-    "langKey": "pd_mercy_entrance",
+    "label": "pd_mercy_entrance",
     "scene": "D01Z04S03",
+    "id": "",
     "defaultHotkey": "MD"
   },
   {
-    "langKey": "pd_mercy_ten_piedad",
+    "label": "pd_mercy_ten_piedad",
     "scene": "D01Z04S12",
+    "id": "",
     "defaultHotkey": "TP"
   },
   {
-    "langKey": "pd_cistern",
+    "label": "pd_cistern",
     "scene": "D01Z05S19",
+    "id": "",
     "defaultHotkey": "DC"
   },
   {
-    "langKey": "pd_echoes_west",
+    "label": "pd_echoes_west",
     "scene": "D20Z01S01",
+    "id": "",
     "defaultHotkey": "EW"
   },
   {
-    "langKey": "pd_echoes_east",
+    "label": "pd_echoes_east",
     "scene": "D20Z01S11",
+    "id": "",
     "defaultHotkey": "EE"
   },
   {
-    "langKey": "pd_olive_trees",
+    "label": "pd_olive_trees",
     "scene": "D02Z01S01",
+    "id": "",
     "defaultHotkey": "OT"
   },
   {
-    "langKey": "pd_graveyard",
+    "label": "pd_graveyard",
     "scene": "D02Z02S08",
+    "id": "",
     "defaultHotkey": "GP"
   },
   {
-    "langKey": "pd_convent_entrance",
+    "label": "pd_convent_main",
     "scene": "D02Z03S08",
-    "defaultHotkey": "CE"
+    "id": "",
+    "defaultHotkey": "CM"
   },
   {
-    "langKey": "pd_convent_charred_visage_boss",
+    "label": "pd_convent_charred_visage_boss",
     "scene": "D02Z03S09",
+    "id": "",
     "defaultHotkey": "CV"
   },
   {
-    "langKey": "pd_patio",
+    "label": "pd_patio",
     "scene": "D04Z01S01",
+    "id": "",
     "defaultHotkey": "PS"
   },
   {
-    "langKey": "pd_mother_entrance",
+    "label": "pd_mother_entrance",
     "scene": "D04Z03S01",
+    "id": "",
     "defaultHotkey": "MM"
   },
   {
-    "langKey": "pd_mother_melquiades",
+    "label": "pd_mother_melquiades",
     "scene": "D20Z01S01",
+    "id": "",
     "defaultHotkey": "MQ"
   },
   {
-    "langKey": "pd_library_main",
+    "label": "pd_library_main",
     "scene": "D05Z01S03",
+    "id": "",
     "defaultHotkey": "LN"
   },
   {
-    "langKey": "pd_library_patio_shortcut",
+    "label": "pd_library_patio_shortcut",
     "scene": "D05Z01S20",
+    "id": "",
     "defaultHotkey": "LP"
   },
   {
-    "langKey": "pd_canvases_entrance",
+    "label": "pd_canvases_entrance",
     "scene": "D05Z02S01",
+    "id": "",
     "defaultHotkey": "SC"
   },
   {
-    "langKey": "pd_canvases_exposito",
+    "label": "pd_canvases_exposito",
     "scene": "D05Z02S07",
-    "defaultHotkey": "LP"
+    "id": "",
+    "defaultHotkey": "EX"
   },
   {
-    "langKey": "pd_wall",
+    "label": "pd_wall_of_holy_prohibitions",
     "scene": "D09Z01S11",
+    "id": "",
     "defaultHotkey": "WH"
   },
   {
-    "langKey": "pd_rooftops_entrance",
+    "label": "pd_rooftops_entrance",
     "scene": "D06Z01S02",
+    "id": "",
     "defaultHotkey": "RE"
   },
   {
-    "langKey": "pd_rooftops_below_elevator",
+    "label": "pd_rooftops_below_elevator",
     "scene": "D06Z01S23",
+    "id": "",
     "defaultHotkey": "RL"
   },
   {
-    "langKey": "pd_rooftops_upper",
+    "label": "pd_rooftops_upper",
     "scene": "D06Z01S09",
+    "id": "",
     "defaultHotkey": "RU"
   },
   {
-    "langKey": "pd_rooftops_deambulatory",
+    "label": "pd_rooftops_deambulatory",
     "scene": "D07Z01S01",
+    "id": "",
     "defaultHotkey": "DH"
   },
   {
-    "langKey": "pd_havoc_by_elevator",
+    "label": "pd_mourning_and_havoc_by_elevator",
     "scene": "D20Z02S01",
-    "defaultHotkey": "HE"
+    "id": "",
+    "defaultHotkey": "HL"
   },
   {
-    "langKey": "pd_havoc_sierpes",
+    "label": "pd_mourning_and_havoc_sierpes",
     "scene": "D20Z02S09",
+    "id": "",
     "defaultHotkey": "SI"
   },
   {
-    "langKey": "pd_hall_of_dawning",
+    "label": "pd_hall_of_dawning",
     "scene": "D08Z03S02",
+    "id": "",
     "defaultHotkey": "HD"
   }
 ]
