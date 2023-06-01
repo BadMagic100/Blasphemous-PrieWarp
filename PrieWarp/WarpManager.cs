@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using Tools.Level.Interactables;
 using UnityEngine;
@@ -25,20 +26,31 @@ namespace PrieWarp
                 typeof(Color?)
             });
 
-        private readonly Dictionary<string, WarpPoint> warps;
+        private readonly Dictionary<string, WarpPoint> warpsByHotkey;
+        private readonly Dictionary<string, WarpPoint> warpsById;
+        private readonly Dictionary<string, WarpPoint> warpsByScene;
 
         private WarpManager(Dictionary<string, WarpPoint> warps)
         {
-            this.warps = warps;
+            this.warpsByHotkey = warps;
+            this.warpsById = warps.Values.ToDictionary(x => x.id);
+            this.warpsByScene = warps.Values.ToDictionary(x => x.scene);
         }
+
+        public bool WarpExists(string id) => warpsById.ContainsKey(id);
 
         public void AttemptWarp(string hotkey)
         {
             Main.PrieWarp.Log($"Requested warp to {hotkey}");
-            if (warps.TryGetValue(hotkey, out WarpPoint warp))
+            if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
             {
                 // todo - before load, close whatever menu we are in (once we figure out what menu we're doing this from)
-                Main.PrieWarp.Log($"Found warp for hotkey: {warp.label} in {warp.scene}");
+                Main.PrieWarp.Log($"Found warp for hotkey: {warp.id} in {warp.scene}");
+                if (!CanWarp(warp))
+                {
+                    Main.PrieWarp.Log("Could not warp - destination is locked");
+                    return;
+                }
                 SpawnManager.OnTeleportPrieDieu += OnWarpCompleted;
                 spawnManagerSpawnPlayer.Invoke(Core.SpawnManager, new object?[] {
                     warp.scene,
@@ -55,9 +67,17 @@ namespace PrieWarp
             }
         }
 
+        internal void UnlockPrieDieuInCurrentScene()
+        {
+            string id = warpsByScene[Core.LevelManager.currentLevel.LevelName].id;
+            Main.PrieWarp.Log($"Unlocking Prie Dieu {id} (visited)");
+            Main.PrieWarp.LocalSaveData.unlockedPrieDieus.Add(id);
+        }
+
         private bool CanWarp(WarpPoint warp)
         {
-            return Main.PrieWarp.LocalSaveData.unlockAllPrieDieus || 
+            PrieWarpPersistentData data = Main.PrieWarp.LocalSaveData;
+            return data.unlockAllPrieDieus || data.unlockedPrieDieus.Contains(warp.id);
         }
 
         private void OnWarpCompleted(string spawnId)
@@ -82,7 +102,7 @@ namespace PrieWarp
                 foreach (WarpPoint wp in pds)
                 {
                     // todo - allow configuring hotkeys, may require game restart if needed
-                    Main.PrieWarp.Log($"Adding warp point: {wp.defaultHotkey} -> {wp.label}");
+                    Main.PrieWarp.Log($"Adding warp point: {wp.defaultHotkey} -> {wp.id}");
                     warps.Add(wp.defaultHotkey, wp);
                 }
                 warpManager = new WarpManager(warps);

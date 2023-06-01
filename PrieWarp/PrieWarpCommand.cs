@@ -1,4 +1,5 @@
-﻿using ModdingAPI.Commands;
+﻿using Framework.Managers;
+using ModdingAPI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -17,45 +18,67 @@ namespace PrieWarp
             {
                 ["help"] = Help,
                 ["list"] = List,
-                ["toggleunlock"] = ToggleUnlock,
+                ["unlock"] = Unlock,
                 ["warp"] = Warp
             };
         }
 
         private void Help(string[] args)
         {
-
+            Write("Available commands:");
+            Write("list - Lists information about the Prie Dieus");
+            Write("unlock <id>|ALL - unlocks a specific Prie Dieu, or toggles the ability to teleport to any Prie Dieu");
+            Write("warp <hotkey> - warps to a Prie Dieu by its hotkey");
         }
 
         private void List(string[] args)
         {
-
+            if (!ValidateWarpManager(out WarpManager? warpManager) || !ValidateInSave())
+            {
+                return;
+            }
         }
 
-        private void ToggleUnlock(string[] args)
+        private void Unlock(string[] args)
         {
-            if (!ValidateWarpManager(out WarpManager? warpManager))
+            if (!ValidateParameterList(args, 1)
+                || !ValidateWarpManager(out WarpManager? warpManager)
+                || !ValidateInSave())
             {
                 return;
             }
 
-            if (args.Length == 1 && args[0] == "all")
+            PrieWarpPersistentData data = Main.PrieWarp.LocalSaveData;
+            string id = args[0];
+            if (id == "all")
             {
-                Main.PrieWarp.LocalSaveData
-                Write("Unlocked all prie dieus");
-                return;
+                data.unlockAllPrieDieus = !data.unlockAllPrieDieus;
+                Write($"{ToggledVerb(data.unlockAllPrieDieus)} all Prie Dieus");
+            }
+            else if (!warpManager.WarpExists(id))
+            {
+                Write($"No warp with the id {id} exists");
+            }
+            else
+            {
+                data.unlockedPrieDieus.Add(id);
+                Write($"Unlocked Prie Dieu with id {id}");
             }
         }
 
         private void Warp(string[] args)
         {
-            if (!ValidateParameterList(args, 1) || !ValidateWarpManager(out WarpManager? warpManager))
+            if (!ValidateParameterList(args, 1) 
+                || !ValidateWarpManager(out WarpManager? warpManager)
+                || !ValidateInSave())
             {
                 return;
             }
 
             warpManager.AttemptWarp(args[0].ToUpper());
         }
+
+        private string ToggledVerb(bool newState) => newState ? "Unlocked" : "Locked";
 
         private bool ValidateWarpManager([NotNullWhen(true)] out WarpManager? warpManager)
         {
@@ -66,6 +89,16 @@ namespace PrieWarp
                 return false;
             }
             warpManager = Main.PrieWarp.WarpManager;
+            return true;
+        }
+
+        private bool ValidateInSave()
+        {
+            if (Core.LevelManager.currentLevel.LevelName == "MainMenu")
+            {
+                Write("PrieWarp commands can only be used from inside a save file.");
+                return false;
+            }
             return true;
         }
     }

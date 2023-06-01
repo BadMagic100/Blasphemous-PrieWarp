@@ -1,171 +1,171 @@
 ﻿[
   {
-    "label": "pd_brotherhood_main",
+    "id": "pd_brotherhood_main",
     "scene": "D17Z01S05",
     "defaultHotkey": "BM"
   },
   {
-    "label": "pd_brotherhood_upper",
+    "id": "pd_brotherhood_upper",
     "scene": "D17Z01S13",
     "defaultHotkey": "BU"
   },
   {
-    "label": "pd_mountain_cistern",
+    "id": "pd_mountain_cistern",
     "scene": "D03Z01S02",
     "defaultHotkey": "MC"
   },
   {
-    "label": "pd_mountain_brotherhood",
+    "id": "pd_mountain_brotherhood",
     "scene": "D03Z01S05",
     "defaultHotkey": "MB"
   },
   {
-    "label": "pd_jondo",
+    "id": "pd_jondo",
     "scene": "D03Z02S02",
     "defaultHotkey": "JO"
   },
   {
-    "label": "pd_grievance_entrance",
+    "id": "pd_grievance_entrance",
     "scene": "D03Z03S01",
     "defaultHotkey": "GA"
   },
   {
-    "label": "pd_grievance_tres_angustias",
+    "id": "pd_grievance_tres_angustias",
     "scene": "D03Z03S11",
     "defaultHotkey": "TA"
   },
   {
-    "label": "pd_holy_line",
+    "id": "pd_holy_line",
     "scene": "D01Z01S07",
     "defaultHotkey": "HL"
   },
   {
-    "label": "pd_albero",
+    "id": "pd_albero",
     "scene": "D01Z02S01",
     "defaultHotkey": "AA"
   },
   {
-    "label": "pd_bridge",
+    "id": "pd_bridge",
     "scene": "D08Z01S01",
     "defaultHotkey": "BR"
   },
   {
-    "label": "pd_mercy_dreams_entrance",
+    "id": "pd_mercy_dreams_entrance",
     "scene": "D01Z04S03",
     "defaultHotkey": "MD"
   },
   {
-    "label": "pd_mercy_dreams_ten_piedad",
+    "id": "pd_mercy_dreams_ten_piedad",
     "scene": "D01Z04S12",
     "defaultHotkey": "TP"
   },
   {
-    "label": "pd_cistern",
+    "id": "pd_cistern",
     "scene": "D01Z05S19",
     "defaultHotkey": "DC"
   },
   {
-    "label": "pd_echoes_west",
+    "id": "pd_echoes_west",
     "scene": "D20Z01S01",
     "defaultHotkey": "EW"
   },
   {
-    "label": "pd_echoes_east",
+    "id": "pd_echoes_east",
     "scene": "D20Z01S11",
     "defaultHotkey": "EE"
   },
   {
-    "label": "pd_olive_trees",
+    "id": "pd_olive_trees",
     "scene": "D02Z01S01",
     "defaultHotkey": "OT"
   },
   {
-    "label": "pd_graveyard",
+    "id": "pd_graveyard",
     "scene": "D02Z02S08",
     "defaultHotkey": "GP"
   },
   {
-    "label": "pd_convent_main",
+    "id": "pd_convent_main",
     "scene": "D02Z03S08",
     "defaultHotkey": "CM"
   },
   {
-    "label": "pd_convent_charred_visage_boss",
+    "id": "pd_convent_charred_visage_boss",
     "scene": "D02Z03S09",
     "defaultHotkey": "CV"
   },
   {
-    "label": "pd_patio",
+    "id": "pd_patio",
     "scene": "D04Z01S01",
     "defaultHotkey": "PS"
   },
   {
-    "label": "pd_mother_entrance",
+    "id": "pd_mother_entrance",
     "scene": "D04Z03S01",
     "defaultHotkey": "MM"
   },
   {
-    "label": "pd_mother_melquiades",
+    "id": "pd_mother_melquiades",
     "scene": "D04Z02S21",
     "defaultHotkey": "MQ"
   },
   {
-    "label": "pd_library_main",
+    "id": "pd_library_main",
     "scene": "D05Z01S03",
     "defaultHotkey": "LN"
   },
   {
-    "label": "pd_library_patio_shortcut",
+    "id": "pd_library_patio_shortcut",
     "scene": "D05Z01S20",
     "defaultHotkey": "LP"
   },
   {
-    "label": "pd_canvases_entrance",
+    "id": "pd_canvases_entrance",
     "scene": "D05Z02S01",
     "defaultHotkey": "SC"
   },
   {
-    "label": "pd_canvases_exposito",
+    "id": "pd_canvases_exposito",
     "scene": "D05Z02S07",
     "defaultHotkey": "EX"
   },
   {
-    "label": "pd_wall_of_holy_prohibitions",
+    "id": "pd_wall_of_holy_prohibitions",
     "scene": "D09Z01S11",
     "defaultHotkey": "WH"
   },
   {
-    "label": "pd_rooftops_entrance",
+    "id": "pd_rooftops_entrance",
     "scene": "D06Z01S02",
     "defaultHotkey": "RT"
   },
   {
-    "label": "pd_rooftops_below_elevator",
+    "id": "pd_rooftops_below_elevator",
     "scene": "D06Z01S23",
     "defaultHotkey": "RE"
   },
   {
-    "label": "pd_rooftops_upper",
+    "id": "pd_rooftops_upper",
     "scene": "D06Z01S09",
     "defaultHotkey": "RU"
   },
   {
-    "label": "pd_rooftops_deambulatory",
+    "id": "pd_rooftops_deambulatory",
     "scene": "D07Z01S01",
     "defaultHotkey": "DH"
   },
   {
-    "label": "pd_mourning_and_havoc_by_elevator",
+    "id": "pd_mourning_and_havoc_by_elevator",
     "scene": "D20Z02S01",
     "defaultHotkey": "MH"
   },
   {
-    "label": "pd_mourning_and_havoc_sierpes",
+    "id": "pd_mourning_and_havoc_sierpes",
     "scene": "D20Z02S09",
     "defaultHotkey": "SI"
   },
   {
-    "label": "pd_hall_of_dawning",
+    "id": "pd_hall_of_dawning",
     "scene": "D08Z03S02",
     "defaultHotkey": "HD"
   }
