@@ -1,5 +1,6 @@
 ﻿using Framework.Managers;
 using Framework.Util;
+using Gameplay.GameControllers.Penitent;
 using HarmonyLib;
 using ModdingAPI;
 using System;
@@ -42,7 +43,21 @@ namespace PrieWarp
         public void AttemptWarp(string hotkey)
         {
             Main.PrieWarp.Log($"Requested warp to {hotkey}");
-            if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
+            if (hotkey == "SS")
+            {
+                Main.PrieWarp.Log("Warpning to starting location");
+                SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
+                Core.SpawnManager.ResetPersistence();
+                Core.SpawnManager.FirstSpanw = true;
+                Core.SpawnManager.Respawn();
+            }
+            else if (hotkey == "LL")
+            {
+                Main.PrieWarp.Log("Warping to last save point");
+                SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
+                Core.SpawnManager.Respawn();
+            }
+            else if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
             {
                 // todo - before load, close whatever menu we are in (once we figure out what menu we're doing this from)
                 Main.PrieWarp.Log($"Found warp for hotkey: {warp.id} in {warp.scene}");
@@ -51,7 +66,7 @@ namespace PrieWarp
                     Main.PrieWarp.Log("Could not warp - destination is locked");
                     return;
                 }
-                SpawnManager.OnTeleportPrieDieu += OnWarpCompleted;
+                SpawnManager.OnTeleportPrieDieu += OnWarpToPrieDieuCompleted;
                 spawnManagerSpawnPlayer.Invoke(Core.SpawnManager, new object?[] {
                     warp.scene,
                     SpawnManager.PosibleSpawnPoints.TeleportPrieDieu,
@@ -80,17 +95,40 @@ namespace PrieWarp
             return data.unlockAllPrieDieus || data.unlockedPrieDieus.Contains(warp.id);
         }
 
-        private void OnWarpCompleted(string spawnId)
+        private void OnRespawnCompleted(Penitent penitent)
         {
-            SpawnManager.OnTeleportPrieDieu -= OnWarpCompleted;
-            PrieDieu pd = UnityEngine.Object.FindObjectOfType<PrieDieu>();
-            Singleton<Core>.Instance.StartCoroutine(WaitUntilReadyThenUse(pd));
+            SpawnManager.OnPlayerSpawn -= OnRespawnCompleted;
+            Singleton<Core>.Instance.StartCoroutine(WaitUntilReadyThenSimulateUse(null));
         }
 
-        private IEnumerator WaitUntilReadyThenUse(PrieDieu pd)
+        private void OnWarpToPrieDieuCompleted(string spawnId)
+        {
+            SpawnManager.OnTeleportPrieDieu -= OnWarpToPrieDieuCompleted;
+            PrieDieu pd = UnityEngine.Object.FindObjectOfType<PrieDieu>();
+            Singleton<Core>.Instance.StartCoroutine(WaitUntilReadyThenSimulateUse(pd));
+        }
+
+        private IEnumerator WaitUntilReadyThenSimulateUse(PrieDieu? pd)
         {
             yield return new WaitUntil(() => !Core.Input.InputBlocked);
-            pd.Use();
+            if (pd != null)
+            {
+                Core.SpawnManager.ActivePrieDieu = pd;
+            }
+            SimulateReusePrieDieu();
+        }
+
+        private void SimulateReusePrieDieu()
+        {
+            Core.Logic.Penitent.Stats.Life.SetToCurrentMax();
+            Core.Logic.Penitent.Stats.Flask.SetToCurrentMax();
+            if (Core.Alms.GetPrieDieuLevel() > 1)
+            {
+                Core.Logic.Penitent.Stats.Fervour.SetToCurrentMax();
+            }
+            Core.Persistence.SaveGame();
+            Core.Logic.EnemySpawner.RespawnDeadEnemies();
+            Core.Logic.BreakableManager.Reset();
         }
 
         public static bool TryLoad(FileUtil fileUtil, [NotNullWhen(true)] out WarpManager? warpManager)
