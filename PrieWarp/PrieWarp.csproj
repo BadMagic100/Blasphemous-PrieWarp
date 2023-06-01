@@ -44,6 +44,12 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Resources\data\prieDieus.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
     <Target Name="Packaging" AfterTargets="PostBuildEvent">
         <PropertyGroup>
             <PackageDir>$(TargetDir)/Packaging</PackageDir>
@@ -67,8 +73,6 @@
             <PackageDir>$(TargetDir)/Packaging</PackageDir>
             <BundleDir>$(PackageDir)/bundle</BundleDir>
         </PropertyGroup>
-        <!--We've made the releasable zip copy, now make some additional changes for our personal copy and "deploy" it-->
-        <Copy SourceFiles="$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(BlasphemousDir)/Modding/plugins" />
         <ItemGroup>
             <BundledFiles Include="$(BundleDir)/**/*" />
         </ItemGroup>
