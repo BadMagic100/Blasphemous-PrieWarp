@@ -7,6 +7,7 @@ namespace PrieWarp
         public const string PERSISTENT_ID = "ID_PRIEWARP";
 
         public WarpManager? WarpManager { get; private set; }
+        public HotkeyWatcher? HotkeyWatcher { get; private set; }
 
         public PrieWarpPersistentData LocalSaveData { get; private set; } = new();
 
@@ -22,7 +23,13 @@ namespace PrieWarp
                 return;
             }
             WarpManager = warpManager;
+            HotkeyWatcher = new HotkeyWatcher();
             RegisterCommand(new PrieWarpCommand());
+        }
+
+        protected override void Update()
+        {
+            HotkeyWatcher?.Update();
         }
 
         public override ModPersistentData SaveGame() => LocalSaveData;

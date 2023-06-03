@@ -40,21 +40,26 @@ namespace PrieWarp
 
         public bool WarpExists(string id) => warpsById.ContainsKey(id);
 
-        public void AttemptWarp(string hotkey)
+        public bool AttemptWarp(string hotkey)
         {
+            // usage of cherub respawn is actually functional - it is apparently the only way to track the state
+            // of on ongoing respawn reliably, otherwise we may restore resources before you're allowed to
+            //
+            // but also it's aesthetically pleasing
             Main.PrieWarp.Log($"Requested warp to {hotkey}");
             if (hotkey == "SS")
             {
                 Main.PrieWarp.Log("Warpning to starting location");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
                 Core.SpawnManager.ResetPersistence();
-                Core.SpawnManager.FirstSpanw = true;
+                Core.Events.SetFlag("CHERUB_RESPAWN", true);
                 Core.SpawnManager.Respawn();
             }
             else if (hotkey == "LL")
             {
                 Main.PrieWarp.Log("Warping to last save point");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
+                Core.Events.SetFlag("CHERUB_RESPAWN", true);
                 Core.SpawnManager.Respawn();
             }
             else if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
@@ -64,9 +69,10 @@ namespace PrieWarp
                 if (!CanWarp(warp))
                 {
                     Main.PrieWarp.Log("Could not warp - destination is locked");
-                    return;
+                    return false;
                 }
                 SpawnManager.OnTeleportPrieDieu += OnWarpToPrieDieuCompleted;
+                Core.Events.SetFlag("CHERUB_RESPAWN", true);
                 spawnManagerSpawnPlayer.Invoke(Core.SpawnManager, new object?[] {
                     warp.scene,
                     SpawnManager.PosibleSpawnPoints.TeleportPrieDieu,
@@ -79,7 +85,9 @@ namespace PrieWarp
             else
             {
                 Main.PrieWarp.LogWarning($"Failed to find warp for hotkey");
+                return false;
             }
+            return true;
         }
 
         internal void UnlockPrieDieuInCurrentScene()
@@ -110,9 +118,11 @@ namespace PrieWarp
 
         private IEnumerator WaitUntilReadyThenSimulateUse(PrieDieu? pd)
         {
+            yield return new WaitUntil(() => !Core.Events.GetFlag("CHERUB_RESPAWN"));
             yield return new WaitUntil(() => !Core.Input.InputBlocked);
             if (pd != null)
             {
+                // activate the pd (and consequently unlock it) in the event that we unlock-all'd our way here
                 Core.SpawnManager.ActivePrieDieu = pd;
             }
             SimulateReusePrieDieu();
