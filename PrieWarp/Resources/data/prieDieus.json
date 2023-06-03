@@ -85,9 +85,9 @@
     "defaultHotkey": "GP"
   },
   {
-    "id": "pd_convent_main",
+    "id": "pd_convent_entrance",
     "scene": "D02Z03S08",
-    "defaultHotkey": "CM"
+    "defaultHotkey": "CE"
   },
   {
     "id": "pd_convent_charred_visage_boss",

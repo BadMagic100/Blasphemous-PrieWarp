@@ -38,20 +38,20 @@ namespace PrieWarp
             {
                 if (Input.GetKeyDown(key))
                 {
-                    currentInput.Add(key.ToString());
                     if (currentInput.Count == 2)
                     {
-                        break;
+                        currentInput.RemoveAt(0);
                     }
+                    currentInput.Add(key.ToString());
                 }
             }
 
             if (currentInput.Count == 2)
             {
                 string input = currentInput[0] + currentInput[1];
-                currentInput.Clear();
                 if (Main.PrieWarp.WarpManager!.AttemptWarp(input))
                 {
+                    currentInput.Clear();
                     UIController.instance.HideInventory();
                 }
             }
