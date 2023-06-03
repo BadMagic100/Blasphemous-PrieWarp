@@ -17,7 +17,6 @@ namespace PrieWarp
             return new Dictionary<string, Action<string[]>>()
             {
                 ["help"] = Help,
-                ["list"] = List,
                 ["unlock"] = Unlock,
                 ["warp"] = Warp
             };
@@ -26,17 +25,8 @@ namespace PrieWarp
         private void Help(string[] args)
         {
             Write("Available commands:");
-            Write("list - Lists information about the Prie Dieus");
             Write("unlock <id>|ALL - unlocks a specific Prie Dieu, or toggles the ability to teleport to any Prie Dieu");
             Write("warp <hotkey> - warps to a Prie Dieu by its hotkey");
-        }
-
-        private void List(string[] args)
-        {
-            if (!ValidateWarpManager(out WarpManager? warpManager) || !ValidateInSave())
-            {
-                return;
-            }
         }
 
         private void Unlock(string[] args)
