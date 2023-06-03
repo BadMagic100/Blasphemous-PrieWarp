@@ -93,8 +93,10 @@ namespace PrieWarp
         internal void UnlockPrieDieuInCurrentScene()
         {
             string id = warpsByScene[Core.LevelManager.currentLevel.LevelName].id;
-            Main.PrieWarp.Log($"Unlocking Prie Dieu {id} (visited)");
-            Main.PrieWarp.LocalSaveData.unlockedPrieDieus.Add(id);
+            if (Main.PrieWarp.LocalSaveData.unlockedPrieDieus.Add(id))
+            {
+                Main.PrieWarp.Log($"Unlocked Prie Dieu {id} (first visit)");
+            }
         }
 
         private bool CanWarp(WarpPoint warp)
