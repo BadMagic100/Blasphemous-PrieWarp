@@ -27,12 +27,16 @@ namespace PrieWarp
                 typeof(Color?)
             });
 
+        private readonly string warpStartHotkey;
+        private readonly string warpLastHotkey;
         private readonly Dictionary<string, WarpPoint> warpsByHotkey;
         private readonly Dictionary<string, WarpPoint> warpsById;
         private readonly Dictionary<string, WarpPoint> warpsByScene;
 
-        private WarpManager(Dictionary<string, WarpPoint> warps)
+        private WarpManager(string warpStartHotkey, string warpLastHotkey, Dictionary<string, WarpPoint> warps)
         {
+            this.warpStartHotkey = warpStartHotkey;
+            this.warpLastHotkey = warpLastHotkey;
             this.warpsByHotkey = warps;
             this.warpsById = warps.Values.ToDictionary(x => x.id);
             this.warpsByScene = warps.Values.ToDictionary(x => x.scene);
@@ -47,7 +51,7 @@ namespace PrieWarp
             //
             // but also it's aesthetically pleasing
             Main.PrieWarp.Log($"Requested warp to {hotkey}");
-            if (hotkey == "SS")
+            if (hotkey == warpStartHotkey)
             {
                 Main.PrieWarp.Log("Warpning to starting location");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
@@ -55,7 +59,7 @@ namespace PrieWarp
                 Core.Events.SetFlag("CHERUB_RESPAWN", true);
                 Core.SpawnManager.Respawn();
             }
-            else if (hotkey == "LL")
+            else if (hotkey == warpLastHotkey)
             {
                 Main.PrieWarp.Log("Warping to last save point");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
@@ -64,7 +68,6 @@ namespace PrieWarp
             }
             else if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
             {
-                // todo - before load, close whatever menu we are in (once we figure out what menu we're doing this from)
                 Main.PrieWarp.Log($"Found warp for hotkey: {warp.id} in {warp.scene}");
                 if (!CanWarp(warp))
                 {
@@ -145,17 +148,24 @@ namespace PrieWarp
 
         public static bool TryLoad(FileUtil fileUtil, [NotNullWhen(true)] out WarpManager? warpManager)
         {
+            HotkeyConfig config = fileUtil.loadConfig<HotkeyConfig>();
             if (fileUtil.loadDataText("prieDieus.json", out string jsonPDs))
             {
                 List<WarpPoint> pds = fileUtil.jsonObject<List<WarpPoint>>(jsonPDs);
                 Dictionary<string, WarpPoint> warps = new();
                 foreach (WarpPoint wp in pds)
                 {
-                    // todo - allow configuring hotkeys, may require game restart if needed
-                    Main.PrieWarp.Log($"Adding warp point: {wp.defaultHotkey} -> {wp.id}");
-                    warps.Add(wp.defaultHotkey, wp);
+                    if (!config.PrieDieuHotkeys.ContainsKey(wp.id))
+                    {
+                        config.PrieDieuHotkeys[wp.id] = wp.defaultHotkey;
+                    }
+                    string hotkey = config.PrieDieuHotkeys[wp.id];
+                    Main.PrieWarp.Log($"Adding warp point: {hotkey} -> {wp.id}");
+                    warps.Add(hotkey, wp);
                 }
-                warpManager = new WarpManager(warps);
+                // persist defaults
+                fileUtil.saveConfig(config);
+                warpManager = new WarpManager(config.WarpToStartHotkey, config.WarpToLastHardsaveHotkey, warps);
                 return true;
             }
             else
