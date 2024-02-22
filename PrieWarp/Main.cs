@@ -4,7 +4,8 @@ using System;
 namespace PrieWarp
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("com.damocles.blasphemous.modding-api", "1.3.4")]
+    [BepInDependency("Blasphemous.ModdingAPI", "2.1.0")]
+    [BepInDependency("Blasphemous.CheatConsole", "1.0.0")]
     public class Main : BaseUnityPlugin
     {
         private static PrieWarp? prieWarp;
@@ -15,7 +16,7 @@ namespace PrieWarp
 
         private void Start()
         {
-            prieWarp = new(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION);
+            prieWarp = new(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, "BadMagic", PluginInfo.PLUGIN_VERSION);
         }
     }
 }

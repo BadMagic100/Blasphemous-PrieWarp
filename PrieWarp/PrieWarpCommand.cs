@@ -1,5 +1,5 @@
-﻿using Framework.Managers;
-using ModdingAPI.Commands;
+﻿using Blasphemous.CheatConsole;
+using Framework.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

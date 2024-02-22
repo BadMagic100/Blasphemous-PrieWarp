@@ -1,8 +1,10 @@
-﻿using ModdingAPI;
+﻿using Blasphemous.CheatConsole;
+using Blasphemous.ModdingAPI;
+using Blasphemous.ModdingAPI.Persistence;
 
 namespace PrieWarp
 {
-    public class PrieWarp : PersistentMod
+    public class PrieWarp : BlasMod, IPersistentMod
     {
         public const string PERSISTENT_ID = "ID_PRIEWARP";
 
@@ -11,37 +13,41 @@ namespace PrieWarp
 
         public PrieWarpPersistentData LocalSaveData { get; private set; } = new();
 
-        public override string PersistentID => PERSISTENT_ID;
+        public string PersistentID => PERSISTENT_ID;
 
-        public PrieWarp(string modId, string modName, string modVersion) : base(modId, modName, modVersion) { }
+        public PrieWarp(string modId, string modName, string author, string modVersion) : base(modId, modName, author, modVersion) { }
 
-        protected override void Initialize()
+        protected override void OnInitialize()
         {
-            if (!WarpManager.TryLoad(FileUtil, out WarpManager? warpManager))
+            if (!WarpManager.TryLoad(ConfigHandler, FileHandler, out WarpManager? warpManager))
             {
                 LogError("Failed PrieWarp setup - could not prepare warp data.");
                 return;
             }
             WarpManager = warpManager;
             HotkeyWatcher = new HotkeyWatcher();
-            RegisterCommand(new PrieWarpCommand());
         }
 
-        protected override void Update()
+        protected override void OnRegisterServices(ModServiceProvider provider)
+        {
+            provider.RegisterCommand(new PrieWarpCommand());
+        }
+
+        protected override void OnUpdate()
         {
             HotkeyWatcher?.Update();
         }
 
-        public override ModPersistentData SaveGame() => LocalSaveData;
+        public SaveData SaveGame() => LocalSaveData;
 
-        public override void LoadGame(ModPersistentData data) => LocalSaveData = (PrieWarpPersistentData)data;
+        public void LoadGame(SaveData data) => LocalSaveData = (PrieWarpPersistentData)data;
 
-        public override void NewGame(bool NGPlus)
+        protected override void OnNewGame()
         {
             LocalSaveData = new PrieWarpPersistentData();
         }
 
-        public override void ResetGame()
+        public void ResetGame()
         {
             LocalSaveData = new PrieWarpPersistentData();
         }

@@ -1,8 +1,9 @@
-﻿using Framework.Managers;
+﻿using Blasphemous.ModdingAPI.Config;
+using Blasphemous.ModdingAPI.Files;
+using Framework.Managers;
 using Framework.Util;
 using Gameplay.GameControllers.Penitent;
 using HarmonyLib;
-using ModdingAPI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -146,12 +147,11 @@ namespace PrieWarp
             Core.Logic.BreakableManager.Reset();
         }
 
-        public static bool TryLoad(FileUtil fileUtil, [NotNullWhen(true)] out WarpManager? warpManager)
+        public static bool TryLoad(ConfigHandler configHandler, FileHandler fileHandler, [NotNullWhen(true)] out WarpManager? warpManager)
         {
-            HotkeyConfig config = fileUtil.loadConfig<HotkeyConfig>();
-            if (fileUtil.loadDataText("prieDieus.json", out string jsonPDs))
+            HotkeyConfig config = configHandler.Load<HotkeyConfig>();
+            if (fileHandler.LoadDataAsJson("prieDieus.json", out List<WarpPoint> pds))
             {
-                List<WarpPoint> pds = fileUtil.jsonObject<List<WarpPoint>>(jsonPDs);
                 Dictionary<string, WarpPoint> warps = new();
                 foreach (WarpPoint wp in pds)
                 {
@@ -164,7 +164,7 @@ namespace PrieWarp
                     warps.Add(hotkey, wp);
                 }
                 // persist defaults
-                fileUtil.saveConfig(config);
+                configHandler.Save(config);
                 warpManager = new WarpManager(config.WarpToStartHotkey, config.WarpToLastHardsaveHotkey, warps);
                 return true;
             }

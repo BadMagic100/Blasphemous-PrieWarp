@@ -1,11 +1,11 @@
-﻿using ModdingAPI;
+﻿using Blasphemous.ModdingAPI.Persistence;
 using System;
 using System.Collections.Generic;
 
 namespace PrieWarp
 {
     [Serializable]
-    public class PrieWarpPersistentData : ModPersistentData
+    public class PrieWarpPersistentData : SaveData
     {
         public PrieWarpPersistentData() : base(PrieWarp.PERSISTENT_ID) { }
 
