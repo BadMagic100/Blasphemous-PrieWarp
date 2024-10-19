@@ -38,6 +38,7 @@ The default hotkeys are listed here:
 * LP -> **L**ibrary of Negated Words (**P**atio Shortcut)
 * SC -> **S**leeping **C**anvases (Entrance)
 * EX -> **Ex**posito
+* WH -> **W**all of the **H**oly Prohibitions
 * RT -> Archcathedral **R**oof**t**ops (Entrance)
 * RE -> Archcathedral **R**ooftops (Below **E**levator)
 * RU -> Archcathedral **R**ooftops (**U**pper)
