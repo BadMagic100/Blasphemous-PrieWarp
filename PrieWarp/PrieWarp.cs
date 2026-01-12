@@ -4,7 +4,7 @@ using Blasphemous.ModdingAPI.Persistence;
 
 namespace PrieWarp
 {
-    public class PrieWarp : BlasMod, IPersistentMod
+    public class PrieWarp : BlasMod, ISlotPersistentMod<PrieWarpPersistentData>
     {
         public const string PERSISTENT_ID = "ID_PRIEWARP";
 
@@ -21,7 +21,7 @@ namespace PrieWarp
         {
             if (!WarpManager.TryLoad(ConfigHandler, FileHandler, out WarpManager? warpManager))
             {
-                LogError("Failed PrieWarp setup - could not prepare warp data.");
+                ModLog.Error("Failed PrieWarp setup - could not prepare warp data.");
                 return;
             }
             WarpManager = warpManager;
@@ -38,16 +38,16 @@ namespace PrieWarp
             HotkeyWatcher?.Update();
         }
 
-        public SaveData SaveGame() => LocalSaveData;
+        public PrieWarpPersistentData SaveSlot() => LocalSaveData;
 
-        public void LoadGame(SaveData data) => LocalSaveData = (PrieWarpPersistentData)data;
+        public void LoadSlot(PrieWarpPersistentData data) => LocalSaveData = data;
 
         protected override void OnNewGame()
         {
             LocalSaveData = new PrieWarpPersistentData();
         }
 
-        public void ResetGame()
+        public void ResetSlot()
         {
             LocalSaveData = new PrieWarpPersistentData();
         }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace PrieWarp
 {
     [Serializable]
-    public class PrieWarpPersistentData : SaveData
+    public class PrieWarpPersistentData : SlotSaveData
     {
-        public PrieWarpPersistentData() : base(PrieWarp.PERSISTENT_ID) { }
+        public PrieWarpPersistentData() : base() { }
 
         public HashSet<string> unlockedPrieDieus = new();
         public bool unlockAllPrieDieus = false;

@@ -1,4 +1,5 @@
-﻿using Gameplay.UI;
+﻿using Blasphemous.ModdingAPI;
+using Gameplay.UI;
 using Gameplay.UI.Widgets;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace PrieWarp
             {
                 currentInput.Clear();
             }
-            Main.PrieWarp.Log($"Hotkey watching active: {state}");
+            ModLog.Info($"Hotkey watching active: {state}");
         }
 
         public void Update()
@@ -52,7 +53,12 @@ namespace PrieWarp
                 if (Main.PrieWarp.WarpManager!.AttemptWarp(input))
                 {
                     currentInput.Clear();
-                    UIController.instance.HideInventory();
+                    UIController.instance.CloseInventory();
+                }
+                else
+                {
+                    // remove first character to prevent update from repeatedly trying a bad combo
+                    currentInput.RemoveAt(0);
                 }
             }
         }

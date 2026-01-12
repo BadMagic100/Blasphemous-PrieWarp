@@ -1,4 +1,5 @@
-﻿using Blasphemous.ModdingAPI.Config;
+﻿using Blasphemous.ModdingAPI;
+using Blasphemous.ModdingAPI.Config;
 using Blasphemous.ModdingAPI.Files;
 using Framework.Managers;
 using Framework.Util;
@@ -51,10 +52,10 @@ namespace PrieWarp
             // of on ongoing respawn reliably, otherwise we may restore resources before you're allowed to
             //
             // but also it's aesthetically pleasing
-            Main.PrieWarp.Log($"Requested warp to {hotkey}");
+            ModLog.Info($"Requested warp to {hotkey}");
             if (hotkey == warpStartHotkey)
             {
-                Main.PrieWarp.Log("Warpning to starting location");
+                ModLog.Info("Warping to starting location");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
                 Core.SpawnManager.ResetPersistence();
                 Core.Events.SetFlag("CHERUB_RESPAWN", true);
@@ -62,17 +63,17 @@ namespace PrieWarp
             }
             else if (hotkey == warpLastHotkey)
             {
-                Main.PrieWarp.Log("Warping to last save point");
+                ModLog.Info("Warping to last save point");
                 SpawnManager.OnPlayerSpawn += OnRespawnCompleted;
                 Core.Events.SetFlag("CHERUB_RESPAWN", true);
                 Core.SpawnManager.Respawn();
             }
             else if (warpsByHotkey.TryGetValue(hotkey, out WarpPoint warp))
             {
-                Main.PrieWarp.Log($"Found warp for hotkey: {warp.id} in {warp.scene}");
+                ModLog.Info($"Found warp for hotkey: {warp.id} in {warp.scene}");
                 if (!CanWarp(warp))
                 {
-                    Main.PrieWarp.Log("Could not warp - destination is locked");
+                    ModLog.Info("Could not warp - destination is locked");
                     return false;
                 }
                 SpawnManager.OnTeleportPrieDieu += OnWarpToPrieDieuCompleted;
@@ -88,7 +89,7 @@ namespace PrieWarp
             }
             else
             {
-                Main.PrieWarp.LogWarning($"Failed to find warp for hotkey");
+                ModLog.Warn($"Failed to find warp for hotkey");
                 return false;
             }
             return true;
@@ -99,7 +100,7 @@ namespace PrieWarp
             string id = warpsByScene[Core.LevelManager.currentLevel.LevelName].id;
             if (Main.PrieWarp.LocalSaveData.unlockedPrieDieus.Add(id))
             {
-                Main.PrieWarp.Log($"Unlocked Prie Dieu {id} (first visit)");
+                ModLog.Info($"Unlocked Prie Dieu {id} (first visit)");
             }
         }
 
@@ -160,7 +161,7 @@ namespace PrieWarp
                         config.PrieDieuHotkeys[wp.id] = wp.defaultHotkey;
                     }
                     string hotkey = config.PrieDieuHotkeys[wp.id];
-                    Main.PrieWarp.Log($"Adding warp point: {hotkey} -> {wp.id}");
+                    ModLog.Info($"Adding warp point: {hotkey} -> {wp.id}");
                     warps.Add(hotkey, wp);
                 }
                 // persist defaults
@@ -170,7 +171,7 @@ namespace PrieWarp
             }
             else
             {
-                Main.PrieWarp.LogError("Failed to load warp points");
+                ModLog.Error("Failed to load warp points");
                 warpManager = null;
                 return false;
             }
