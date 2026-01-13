@@ -11,8 +11,6 @@ namespace PrieWarp
 
         public PrieWarpPersistentData LocalSaveData { get; private set; } = new();
 
-        public string PersistentID => PERSISTENT_ID;
-
         public PrieWarp(string modId, string modName, string author, string modVersion) : base(modId, modName, author, modVersion) { }
 
         protected override void OnInitialize()
