@@ -6,8 +6,6 @@ namespace PrieWarp
 {
     public class PrieWarp : BlasMod, ISlotPersistentMod<PrieWarpPersistentData>
     {
-        public const string PERSISTENT_ID = "ID_PRIEWARP";
-
         public WarpManager? WarpManager { get; private set; }
         public HotkeyWatcher? HotkeyWatcher { get; private set; }
 

@@ -5,7 +5,7 @@
         <AssemblyName>PrieWarp</AssemblyName>
         <Description>A Blasphemous mod which allows easily warping between unlocked Prie Dieus with mnemonic hotkeys.</Description>
         <BepInExPluginGuid>com.badmagic.blasphemous.priewarp</BepInExPluginGuid>
-        <Version>3.0.0</Version>
+        <Version>3.0.1</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>

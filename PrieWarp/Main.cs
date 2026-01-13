@@ -4,8 +4,8 @@ using System;
 namespace PrieWarp
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("Blasphemous.ModdingAPI", "2.1.0")]
-    [BepInDependency("Blasphemous.CheatConsole", "1.0.0")]
+    [BepInDependency("Blasphemous.ModdingAPI")]
+    [BepInDependency("Blasphemous.CheatConsole")]
     public class Main : BaseUnityPlugin
     {
         private static PrieWarp? prieWarp;
